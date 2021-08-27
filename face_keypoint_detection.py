@@ -85,3 +85,6 @@ plt.imshow(keyfacial_df_copy['Image'][9],cmap='gray')
 for j in range(1, 31, 2):
         plt.plot(keyfacial_df_copy.loc[9][j-1], keyfacial_df_copy.loc[9][j], 'rx')
         
+# Concatenate  the flipped image
+augmented_df = np.concatenate((keyfacial_df, keyfacial_df_copy))
+augmented_df.shape        
