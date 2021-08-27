@@ -100,3 +100,21 @@ augmented_df.shape
 plt.imshow(keyfacial_df_copy['Image'][9], cmap='gray')
 for j in range(1, 31, 2):
         plt.plot(keyfacial_df_copy.loc[9][j-1], keyfacial_df_copy.loc[9][j], 'rx')
+        
+# Vertical flip the images along x axis(0)
+keyfacial_df_copy = copy.copy(keyfacial_df)
+keyfacial_df_copy['Image'] = keyfacial_df_copy['Image'].apply(lambda y: np.flip(y, axis = 0))
+
+for i in range(len(columns)):
+    if i%2 != 0:
+        keyfacial_df_copy[columns[i]] = keyfacial_df_copy[columns[i]].apply(lambda y: 96. - float(y) )
+        
+#  Original image
+plt.imshow(keyfacial_df['Image'][9], cmap = 'gray')
+for j in range(1, 31, 2):
+        plt.plot(keyfacial_df.loc[9][j-1], keyfacial_df.loc[9][j], 'rx')
+        
+#  vertically flipped image
+plt.imshow(keyfacial_df_copy['Image'][9],cmap='gray')
+for j in range(1, 31, 2):
+        plt.plot(keyfacial_df_copy.loc[9][j-1], keyfacial_df_copy.loc[9][j], 'rx')
