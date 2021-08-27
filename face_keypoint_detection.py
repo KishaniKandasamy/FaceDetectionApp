@@ -87,4 +87,16 @@ for j in range(1, 31, 2):
         
 # Concatenate  the flipped image
 augmented_df = np.concatenate((keyfacial_df, keyfacial_df_copy))
-augmented_df.shape        
+augmented_df.shape  
+
+#clip the value between 0 and 255 as intensity <= 255
+
+keyfacial_df_copy = copy.copy(keyfacial_df)
+keyfacial_df_copy['Image'] = keyfacial_df_copy['Image'].apply(lambda x:np.clip(random.uniform(1.5, 2)* x, 0.0, 255.0))
+augmented_df = np.concatenate((augmented_df, keyfacial_df_copy))
+augmented_df.shape
+
+# increased brightness
+plt.imshow(keyfacial_df_copy['Image'][9], cmap='gray')
+for j in range(1, 31, 2):
+        plt.plot(keyfacial_df_copy.loc[9][j-1], keyfacial_df_copy.loc[9][j], 'rx')
