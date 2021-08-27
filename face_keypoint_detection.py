@@ -57,3 +57,31 @@ for i in range(64):
     for j in range(1,31,2):
         plt.plot(keyfacial_df.loc[x][j-1], keyfacial_df.loc[x][j], 'rx')
         
+#Data Augmentation
+# Create a new copy of the dataframe
+import copy
+keyfacial_df_copy = copy.copy(keyfacial_df)
+
+# Obtain the columns in the dataframe
+columns = keyfacial_df_copy.columns[:-1]
+columns
+
+# Horizontal flip the images along y axis(1)
+keyfacial_df_copy['Image'] = keyfacial_df_copy['Image'].apply(lambda x: np.flip(x, axis = 1))
+
+# horizontal- y coordinate values would be the same
+# Only x coordiante values would change( width of the image(96) - x) & only x cordinate only even numbers
+for i in range(len(columns)):
+    if i%2 == 0:
+        keyfacial_df_copy[columns[i]] = keyfacial_df_copy[columns[i]].apply(lambda x: 96. - float(x) )
+        
+#  Original image
+plt.imshow(keyfacial_df['Image'][9], cmap = 'gray')
+for j in range(1, 31, 2):
+        plt.plot(keyfacial_df.loc[9][j-1], keyfacial_df.loc[9][j], 'rx')
+        
+#  Horizontally flipped image
+plt.imshow(keyfacial_df_copy['Image'][9],cmap='gray')
+for j in range(1, 31, 2):
+        plt.plot(keyfacial_df_copy.loc[9][j-1], keyfacial_df_copy.loc[9][j], 'rx')
+        
