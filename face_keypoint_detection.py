@@ -37,3 +37,13 @@ keyfacial_df['Image'].shape
 #Image are given as space separated string, separate the values using ' ' as separator. 1D->2D
 keyfacial_df['Image'] = keyfacial_df['Image'].apply(lambda x: np.fromstring(x, dtype = int, sep = ' ').reshape(96, 96))
 keyfacial_df['Image'][0].shape
+
+#particular column details
+keyfacial_df['right_eye_center_x'].describe()
+
+#x-coordinates are in even columns like 0,2,4,.. and y-coordinates are in odd columns like 1,3,5,..
+i = np.random.randint(1, len(keyfacial_df)) # as o th row is title
+plt.imshow(keyfacial_df['Image'][i], cmap = 'gray')
+for j in range(1, 31, 2):
+        plt.plot(keyfacial_df.loc[i][j-1], keyfacial_df.loc[i][j], 'rx')
+    
