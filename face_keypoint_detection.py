@@ -47,3 +47,13 @@ plt.imshow(keyfacial_df['Image'][i], cmap = 'gray')
 for j in range(1, 31, 2):
         plt.plot(keyfacial_df.loc[i][j-1], keyfacial_df.loc[i][j], 'rx')
     
+# Let's view more images in a grid format
+fig = plt.figure(figsize=(20, 20))
+
+for i in range(64):
+    ax = fig.add_subplot(8, 8, i + 1) 
+    x = np.random.randint(1, len(keyfacial_df))
+    image = plt.imshow(keyfacial_df['Image'][x],cmap = 'gray')
+    for j in range(1,31,2):
+        plt.plot(keyfacial_df.loc[x][j-1], keyfacial_df.loc[x][j], 'rx')
+        
