@@ -118,3 +118,30 @@ for j in range(1, 31, 2):
 plt.imshow(keyfacial_df_copy['Image'][9],cmap='gray')
 for j in range(1, 31, 2):
         plt.plot(keyfacial_df_copy.loc[9][j-1], keyfacial_df_copy.loc[9][j], 'rx')
+
+img = augmented_df[:,30]
+
+# Normalize the images
+img = img/255.
+
+#  array of shape (x, 96, 96, 1) to feed the model
+X = np.empty((len(img), 96, 96, 1))
+
+#  expanding it's dimension from (96, 96) to (96, 96, 1)
+for i in range(len(img)):
+  X[i,] = np.expand_dims(img[i], axis = 2)
+
+# Convert the array type to float32
+X = np.asarray(X).astype(np.float32)
+X.shape
+
+# Obtain the value of x & y coordinates which are to used as target.
+y = augmented_df[:,:30]
+y = np.asarray(y).astype(np.float32)
+y.shape
+
+# Split the data into train and test data 20% testing 
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2)
+
+X_train.shape
+y_test.shape
